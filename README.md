@@ -1,4 +1,4 @@
 # DeadPool
 
-DeadPool is Under Development
+DeadPool is Releasing SOON......
 
