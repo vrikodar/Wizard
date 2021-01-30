@@ -1,4 +1,4 @@
-# DeadPool
+# Wizard
 
 ---
 
