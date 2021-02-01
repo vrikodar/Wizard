@@ -13,6 +13,12 @@
 
 ---
 
+# IMPORTANT NOTE
+
+**You are recommended to clear any existing firewall rules using**
+
+`iptables --flush`
+
 # RUNNING WIZARD
 `git clone https://github.com/SxNade/Wizard && cd Wizard`
 
