@@ -24,7 +24,7 @@ then
 	exit 
 fi
 
-echo -e "\n(wizard v${RED}1.1${NC}) starting...\n"
+echo -e "\nwizard (v${RED}1.1${NC}) starting...\n"
 
 Simple_firewall() {
 	clear
