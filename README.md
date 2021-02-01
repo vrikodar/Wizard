@@ -11,7 +11,7 @@
 # RUNNING WIZARD
 `git clone https://github.com/SxNade/Wizard && cd Wizard`
 
-`chmod +x wizard.sh`
+`chmod +x wizard`
 
 `sudo ./wizard.sh`
 
