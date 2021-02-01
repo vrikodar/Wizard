@@ -59,7 +59,7 @@ Simple_firewall() {
 						iptables -t filter -A INPUT -p icmp -s ${IP} -j ACCEPT
 						if [ "${?}" -eq 0 ]
 						then
-							echo "\nICMP Filtering Done..."
+							echo -e "\nICMP Filtering Done..."
 						fi
 					done
 					iptables -t filter -A INPUT -p icmp -j DROP
