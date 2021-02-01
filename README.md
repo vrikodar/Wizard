@@ -11,8 +11,20 @@
 # RUNNING WIZARD
 `git clone https://github.com/SxNade/Wizard && cd Wizard`
 
-`chmod +x wizard`
+`chmod +x wizard.sh`
 
-`sudo ./wizard`
+`sudo ./wizard.sh`
 
 ![Capture](https://github.com/SxNade/Wizard/blob/main/wizard.gif)
+
+# `MORE INFO`
+
+*The current release is a minimal release complete release will be made soon*
+
+**wizard is still under active development you may also contribute**
+
+`https://github.com/SxNade/Wizard`
+
+# MAKE IT BETTER
+
+**Contribute:::report any bugs or fixes required**
