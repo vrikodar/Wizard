@@ -23,8 +23,6 @@ then
 	echo -e "[${RED}*${NC}]Please Run the Script as Root..\n"
 	exit 
 fi
-iptables --flush
-iptables -X
 
 echo -e "\n(wizard v${RED}1.1${NC}) starting...\n"
 
