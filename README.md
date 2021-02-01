@@ -13,6 +13,6 @@
 
 `chmod +x wizard`
 
-`sudo ./wizard.sh`
+`sudo ./wizard`
 
 ![Capture](https://github.com/SxNade/Wizard/blob/main/wizard.gif)
