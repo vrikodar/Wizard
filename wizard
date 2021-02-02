@@ -13,8 +13,39 @@ echo "
 	https://github.com/SxNade
 "
 
+
 RED='\033[0;31m'
 NC='\033[0m' # No Color
+GR='\033[0;32m'
+BRed='\033[1;31m'
+BGreen='\033[1;32m'
+
+persist=False
+
+if [ "${1}" = "--strict" ]
+then
+	echo -e "\n[${BRed}+${NC}] Strict Mode On"
+	echo -e "[${BGreen}+${NC}] Changing Default Policy to Drop all Incoming Traffic\n"
+	iptables -P INPUT -j DROP
+fi
+
+if [ "${2}" = "--persist" ]
+then
+	echo -e "\n[${BRed}+${NC}] Persist Mode On"
+	echo -e "[${GR}*${NC}] Installing/updating iptables-persistent"
+	echo "[$(date)] Installing/updating iptables-persistent" >> wizard.log
+	sudo apt install iptables-presistent 1> /dev/null 2> wizard.log
+	persist=True
+	if [ "${?}" -eq 0 ]
+	then
+		echo -e "[${GR}+${NC}] Install Successfull"
+	else
+		echo -e "[${BRed}-${NC}] Some error was encountered while Installing iptables-persistent"
+		echo -e "\n[${GR}+${NC}] Please check the Log File for more Info"
+		exit
+	fi
+fi
+
 
 
 echo 
@@ -38,6 +69,8 @@ Simple_firewall() {
 	if [ "${SF_ASK}" -eq "1" ]
 	then
 		echo -e "
+		[${BGreen}+${NC}] FILTER INCOMING TRAFFIC
+
 		[${GR}+${NC}] Filter ${BRed}ICMP${NC} Traffic → ICMP
 		[${GR}+${NC}] Filter ${BRed}SSH${NC} Traffic → SSH
 		[${GR}+${NC}] Filter ${BRed}HTTP${NC} Traffic → HTTP
@@ -117,15 +150,107 @@ Simple_firewall() {
 						exit
 			esac
 		done
+	elif [ "${SF_ASK}" -eq "2" ]
+	then
+		echo -e "
+		${BGreen}+${NC}] FILTER OUTGOING TRAFFIC
+
+		[${GR}+${NC}] Filter ${BRed}ICMP${NC} Traffic → ICMP
+		[${GR}+${NC}] Filter ${BRed}SSH${NC} Traffic → SSH
+		[${GR}+${NC}] Filter ${BRed}HTTP${NC} Traffic → HTTP
+		[${GR}+${NC}] Filter ${BRed}HTTPS${NC} Traffic → HTTPS
+		[${GR}+${NC}] Filter ${BRed}FTP${NC} Traffic → FTP
+		\n"
+		read -p "[*] Enter the service or services to Filter::Seprate by spaces if needed: " Services
+		read -p "[*] Please add allowed IPs or Networks::CIDR-Notaion:: If Any:Seprate by spaces: " Allowed_IPs
+		for service in $Services
+		do
+			echo "[$(date)] Selected ${service} for filtering" >> wizard.log
+			case "$service" in 
+				ICMP | icmp)
+					for IP in $Allowed_IPs
+					do
+						echo -n "Filtering Outgoing ICMP"
+						iptables -t filter -A OUTPUT -p icmp -d ${IP} -j ACCEPT
+						if [ "${?}" -eq 0 ]
+						then
+							echo -e "\nICMP Filtering Done..."
+						fi
+					done
+					iptables -t filter -A OUTPUT -p icmp -j DROP
+					;;
+				SSH | ssh)
+					for IP in $Allowed_IPs
+					do
+						echo -n "Filtering Outgoing SSH"
+						iptables -t filter -A OUTPUT -p tcp --dport 22 -d ${IP} -j ACCEPT
+						if [ "${?}" -eq 0 ]
+						then
+							echo -e "\nSSH Filtering Done..."
+						fi
+					done
+					iptables -t filter -A OUTPUT -p tcp --dport 22 -j DROP
+					;;
+				HTTP | http)
+					for IP in $Allowed_IPs
+					do
+						echo -n "Filtering Outgoing HTTP"
+						iptables -t filter -A OUTPUT -p tcp --dport 80 -d ${IP} -j ACCEPT
+						if [ "${?}" -eq 0 ]
+						then
+							echo -e "\nHTTP Filtering Done..."
+						fi
+					done
+					iptables -t filter -A OUTPUT -p tcp --dport 80 -j DROP
+					;;
+				HTTPS | https)
+					for IP in $Allowed_IPs
+					do
+						echo -n "Filtering Outgoing HTTPS"
+						iptables -t filter -A OUTPUT -p tcp --dport 443 -d ${IP} -j ACCEPT
+						if [ "${?}" -eq 0 ]
+						then
+							echo -e "\nHTTPS Filtering Done..."
+						fi
+					done
+					iptables -t filter -A INPUT -p tcp --dport 443 -j DROP
+					;;
+				FTP | ftp)
+					for IP in $Allowed_IPs
+					do
+						echo -n "Filtering Incoming FTP"
+						iptables -t filter -A INPUT -p tcp --dport 21 -d ${IP} -j ACCEPT
+						if [ "${?}" -eq 0 ]
+						then
+							echo -e "\nFTP Filtering Done..."
+						fi
+					done
+					iptables -t filter -A INPUT -p tcp --dport 21 -j DROP
+					;;
+					*)
+						echo "[$(date)] Unknown option specified" >> wizard.log
+						echo "Error while parsing  your selection"
+						echo -e "Please ${BRed}check the Log File${NC} For more Info"
+						exit
+			esac
+		done
+		if [ "$persist" -eq True ]
+		then
+			sleep 2
+			echo -e "\n[${GR}+${NC}] Saving Firewall rules\n"
+			iptables-save > /etc/iptables/rules.v4
+		fi
 	fi
 }
 
+Advanced_firewall() {
+	clear
+	echo -e "\n\n\n[${RED}#${NC}]Advanced Firewall--AD1\n\n\n"
+}
+
+
 sleep 2
 
-RED='\033[0;31m'
-NC='\033[0m' # No Color
-GR='\033[0;32m'
-BRed='\033[1;31m'
 
 echo " " >> wizard.log
 echo "::: Wizard Initiated at $(date) :::" >>  wizard.log
@@ -144,6 +269,13 @@ if [ "${ASK}" -eq "1" ]
 then
 	echo "Simple Firewall Selected By ${HOSTNAME}" >> wizard.log
 	notify-send "Initializing Simple Firewall For::${HOSTNAME}"
-	logger "${0} Running::Wizard--on/at--:$(date)::::Firwall Framework For Linux By SxNade::https://github.com/SxNade"
+	logger "${0} Running::[SF--1]::Wizard--on/at--:$(date)::::Firwall Framework For Linux By SxNade::https://github.com/SxNade"
 	Simple_firewall
+elif [ "${ASK}" -eq "2" ]
+then
+	echo "Advanced Firewall Selected By ${HOSTNAME}" >> wizard.log
+	notify-send "Initializing Advanced Firewall For::${HOSTNAME}"
+	logger "${0} Running::[SF--2]::Wizard--on/at--:$(date)::::Firwall Framework For Linux By SxNade::https://github.com/SxNade"
+	Advanced_firewall
 fi
+
