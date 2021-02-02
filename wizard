@@ -26,7 +26,7 @@ if [ "${1}" = "--strict" ]
 then
 	echo -e "\n[${BRed}+${NC}] Strict Mode On"
 	echo -e "[${BGreen}+${NC}] Changing Default Policy to Drop all Incoming Traffic\n"
-	iptables -P INPUT -j DROP
+	iptables -P INPUT DROP
 fi
 
 if [ "${2}" = "--persist" ]
