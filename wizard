@@ -252,6 +252,23 @@ Simple_firewall() {
 Advanced_firewall() {
 	clear
 	echo -e "\n\n\n[${RED}#${NC}]Advanced Firewall--AD1\n\n\n"
+	
+	echo -e "[${GR}+${NC}] ${BRed}WizardBlock${NC}::(Contains a series of Best suited Custom Predefined Rules) → 1"
+	echo -e "[${GR}+${NC}] ${BRed}MassBlock${NC}::(Blocks IP's from a text file containing List of IP's) → 2"
+	echo -e "[${GR}+${NC}] ${BRed}Aggressive Block${NC}::(Blocks IP's By sending a Reject Message Back) → 3"
+	echo -e "[${GR}+${NC}] ${BRed}Mac-Block${NC}::(Accepts/Rejects traffic from only selected Mac addresses) → 4"
+	echo -e "[${GR}+${NC}] ${BRed}NAT${NC}::(Network Address Translation to the internet) → 5"
+	echo -e "[${GR}+${NC}] ${BRed}DNAT${NC}::(Forwarding Incoming Requests From Internet To Local LAN::suitable if your machine is directly connected to internet) → 6"
+	echo -e "[${GR}+${NC}] ${BRed}CountryBlock${NC}:::(Choose to Get a List of countries to Block or Accept) → 7"
+	echo -e "[${GR}+${NC}] ${BRed}InterFace-Block${NC}:::(Block Traffic from interfaces/interface) → 8"
+	echo -e "[${GR}+${NC}] ${BRed}Log--and--Drop${NC}:::(Log and Drop Incoming Traffic) → 9"
+	echo -e "[${GR}+${NC}] ${BRed}CleanBlock${NC}:::(Drops all packets with invalid connection state) → 9"
+	echo -e "[${GR}+${NC}] ${BRed}DOS-Protection${NC}:::(Offers A Great Number of options to Protect Server from Denial of Service Attacks) → 10"
+	echo -e "[${GR}+${NC}] ${BRed}Traffic-mirroring${NC}:::(Mirror the same Traffic to Another Host)"
+	echo -e "[${GR}+${NC}] ${BRed}Time/Day-Based${NC}:::(Run Firewall in a Bound-Time of some hours or only on weekdays) → 11"
+	echo -e "[${GR}+${NC}] ${BRed}Honey-pot${NC}:::(Runs a honeypot to detect and Block Malicious Traffic in real-time) → 12"
+	echo
+	read -p "[*] Please choose the relevant option/options::seprate by spaces if needed:→  " ADF_options
 }
 
 
@@ -284,5 +301,4 @@ then
 	logger "${0} Running::[SF--2]::Wizard--on/at--:$(date)::::Firwall Framework For Linux By SxNade::https://github.com/SxNade"
 	Advanced_firewall
 fi
-
 
