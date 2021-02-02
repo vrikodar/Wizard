@@ -26,7 +26,7 @@ if [ "${1}" = "--strict" ]
 then
 	echo -e "\n[${BRed}+${NC}] Strict Mode On"
 	echo -e "[${BGreen}+${NC}] Changing Default Policy to Drop all Incoming Traffic\n"
-	iptables -P INPUT DROP
+	iptables -P INPUT -j DROP
 fi
 
 if [ "${2}" = "--persist" ]
@@ -34,9 +34,9 @@ then
 	echo -e "\n[${BRed}+${NC}] Persist Mode On"
 	echo -e "[${GR}*${NC}] Installing/updating iptables-persistent"
 	echo "[$(date)] Installing/updating iptables-persistent" >> wizard.log
-	sudo apt install iptables-persistent 1> /dev/null 2> wizard.log
+	sudo apt install iptables-presistent 1> /dev/null 2> wizard.log
 	persist=True
-	if [ "${?}" -eq "0" ]
+	if [ "${?}" -eq 0 ]
 	then
 		echo -e "[${GR}+${NC}] Install Successfull"
 	else
@@ -150,6 +150,12 @@ Simple_firewall() {
 						exit
 			esac
 		done
+		if [ "$persist" -eq True ]
+		then
+			sleep 2
+			echo -e "\n[${GR}+${NC}] Saving Firewall rules\n"
+			iptables-save > /etc/iptables/rules.v4
+		fi
 	elif [ "${SF_ASK}" -eq "2" ]
 	then
 		echo -e "
@@ -278,4 +284,5 @@ then
 	logger "${0} Running::[SF--2]::Wizard--on/at--:$(date)::::Firwall Framework For Linux By SxNade::https://github.com/SxNade"
 	Advanced_firewall
 fi
+
 
