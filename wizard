@@ -34,9 +34,9 @@ then
 	echo -e "\n[${BRed}+${NC}] Persist Mode On"
 	echo -e "[${GR}*${NC}] Installing/updating iptables-persistent"
 	echo "[$(date)] Installing/updating iptables-persistent" >> wizard.log
-	sudo apt install iptables-presistent 1> /dev/null 2> wizard.log
+	sudo apt install iptables-persistent 1> /dev/null 2> wizard.log
 	persist=True
-	if [ "${?}" -eq 0 ]
+	if [ "${?}" -eq "0" ]
 	then
 		echo -e "[${GR}+${NC}] Install Successfull"
 	else
