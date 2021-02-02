@@ -109,6 +109,11 @@ Simple_firewall() {
 						fi
 					done
 					iptables -t filter -A INPUT -p tcp --dport 21 -j DROP
+					;;
+					*)
+						echo "$(date) Unknown option specified" >> wizard.log
+						echo "Error while parsing  your selection"
+						exit
 			esac
 		done
 	fi
