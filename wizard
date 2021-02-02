@@ -121,6 +121,7 @@ NC='\033[0m' # No Color
 GR='\033[0;32m'
 BRed='\033[1;31m'
 
+echo " " >> wizard.log
 echo "::: Wizard Initiated at $(date) :::" >>  wizard.log
 
 echo -e "\n
