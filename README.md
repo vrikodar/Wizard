@@ -5,7 +5,7 @@
 
 # Wizard
 
-![Capture](https://i.gifer.com/origin/1d/1dda6ed3d43bc55b79905acd5cf9f554.gif)
+![Capture](https://i.giphy.com/media/VGwTq3G6a39cI/giphy.mp4)
 
 ---
 
