@@ -113,7 +113,7 @@ Simple_firewall() {
 					*)
 						echo "[$(date)] Unknown option specified" >> wizard.log
 						echo "Error while parsing  your selection"
-						echo "Please check the Log File For more Info"
+						echo -e "Please ${BRed}check the Log File${NC} For more Info"
 						exit
 			esac
 		done
