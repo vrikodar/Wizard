@@ -5,7 +5,7 @@
 
 # Wizard
 
-![Capture](https://i.giphy.com/media/VGwTq3G6a39cI/giphy.mp4)
+![Capture](https://github.com/SxNade/Wizard/blob/main/giphy.gif)
 
 ---
 
