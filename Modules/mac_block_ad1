@@ -43,6 +43,7 @@ do
 		file
 	esac
 done
+iptables -A INPUT -j Mac_Block
 sleep 1
 echo -e "\n[${BGr}+${NC}] Module Execution Successfull\n"
 echo "[$(date)] Mac-Block Module Execution Completed Successfully" >> wizard.log
