@@ -286,8 +286,8 @@ Advanced_firewall() {
 			
 			3)
 			echo "[$(date)] Selected Aggressive Block by ${HOSTNAME}" >> wizard.log
-			chmod +x Modules/aggr_block
-			.//Modules/aggr_block
+			chmod +x Modules/aggr_block_ad1
+			.//Modules/aggr_block_ad1
 			;;
 
 			4)
