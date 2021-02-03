@@ -9,7 +9,7 @@ echo
 
 echo -e "[${GR}+${NC}] ${BRed}Manually${NC} Add Mac-addresses → 1"
 echo -e "[${GR}+${NC}] ${BRed}Text File${NC} Containing Mac-addresses → 2"
-
+echo
 read -p "[*] Please choose a relevant option/options: " Mac
 sleep 1
 echo -e "\n[${Bgr}+${NC}] Forming a Custom Mac-Block chain..\n"
