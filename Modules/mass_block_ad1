@@ -45,7 +45,7 @@ echo
 block() {
 	for port in  $T_Ports
 	do
-		if [ "$port" -ne "139" &&  "$port" -ne "445" ]
+		if [ "$port" != "139" &&  "$port" != "445" ]
 		then
 			iptables -A INPUT -p tcp --dport $port -m set --match-set MassBlock src -j DROP
 		else
