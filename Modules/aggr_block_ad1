@@ -37,7 +37,8 @@ echo -e "${BRed}→${NC} IRC::194"
 echo -e "${BRed}→${NC} NetBIOS::139--UDP"
 echo -e "${BRed}→${NC} SMB::445--UDP"
 
-read -p "[*] Enter The Port Numbers To Block::seprate by spaces if needed:→ " T_Ports
+read -p "[*] Enter The Port Numbers To Block::seprate by spaces if needed:[TCP]→ " T_Ports
+read -p "[*] Enter The Port Numbers To Block::seprate by spaces if needed:[UDP]→ " U_Ports
 echo
 read -p "[*] Enter the IP address or Networks(CIDR) to Block:→ " IPs
 
@@ -46,12 +47,15 @@ block() {
 	do
 		for ip in $IPs
 		do
-			if [ "$port" -ne "139" &&  "$port" -ne "445" ]
-			then
-				iptables -A INPUT -p tcp --dport $port -s ${IPs} -j REJECT --reject-with ${Reject}
-			else
-				iptables -A INPUT -p udp --dport $port -s ${IPs} -j REJECT --reject-with ${Reject}
-			fi
+			iptables -A INPUT -p tcp --dport $port -s ${IPs} -j REJECT --reject-with ${Reject}
+		done
+	done
+
+	for port in $U_Ports
+	do
+		for ip in $IPs
+		do
+			iptables -A INPUT -p udp --dport $port -s ${IPs} -j REJECT --reject-with ${Reject}
 		done
 	done
 }
@@ -60,3 +64,4 @@ sleep 1
 block
 echo -e "\n[${BGr}+${NC}] Module Execution Successfull\n"
 echo "[$(date)] Aggressive Module Execution Completed Successfully" >> wizard.log
+
