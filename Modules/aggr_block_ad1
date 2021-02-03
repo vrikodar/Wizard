@@ -10,16 +10,16 @@ echo "[$(date)] Aggressive Block  Loaded Successfully" >> wizard.log
 echo 
 echo -e "[${BGr}+${NC}] Incoming Traffic"
 echo -e "\n[${BRed}+${NC}] Packet-type to Reject with\n"
-echo -e "[${GR}+${NC}] icmp-net-unreachable → 1"
-echo -e "[${GR}+${NC}] icmp-host-unreachable → 2"
-echo -e "[${GR}+${NC}] icmp-proto-unreachable → 3"
-echo -e "[${GR}+${NC}] icmp-port-unreachable → 4"
-echo -e "[${GR}+${NC}] icmp-net-prohibited → 5"
-echo -e "[${GR}+${NC}] icmp-host-prohibited → 6"
-echo -e "[${GR}+${NC}] tcp-reset → 7"
-echo -e "[${GR}+${NC}] icmp-admin-prohibited → 8"
+echo -e "[${GR}+${NC}] icmp-net-unreachable"
+echo -e "[${GR}+${NC}] icmp-host-unreachable"
+echo -e "[${GR}+${NC}] icmp-proto-unreachable"
+echo -e "[${GR}+${NC}] icmp-port-unreachable"
+echo -e "[${GR}+${NC}] icmp-net-prohibited"
+echo -e "[${GR}+${NC}] icmp-host-prohibited"
+echo -e "[${GR}+${NC}] tcp-reset"
+echo -e "[${GR}+${NC}] icmp-admin-prohibited"
 
-read -p "[*] Please choose the Relevant Packet to Reject with::one only:→ " Reject
+read -p "[*] Please Enter the Relevant Packet-type to Reject with::one only:→ " Reject
 echo
 echo -e "[${GR}+${NC}] Some Common Services-|-|-Ports"
 echo -e "${BRed}→${NC} HTTP::80"
