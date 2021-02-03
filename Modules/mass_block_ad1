@@ -23,8 +23,8 @@ do
 	ipset -A MassBlock $ip
 done
 
-echo -e "[${BGr}+${NC}] Some Common Services-|-|-Ports"
-echo  -e "${BRed}→${NC} HTTP::80"
+echo -e "[${GR}+${NC}] Some Common Services-|-|-Ports"
+echo -e "${BRed}→${NC} HTTP::80"
 echo -e "${BRed}→${NC} HTTPS::443"
 echo -e "${BRed}→${NC} SSH::22"
 echo -e "${BRed}→${NC} FTP::21"
@@ -39,24 +39,26 @@ echo -e "${BRed}→${NC} IRC::194"
 echo -e "${BRed}→${NC} NetBIOS::139--UDP"
 echo -e "${BRed}→${NC} SMB::445--UDP"
 
-read -p "[*] Enter The Port Numbers To Block::seprate by spaces if needed:→ " T_Ports
+read -p "[*] Enter The Port Numbers To Block::seprate by spaces if needed[TCP]:→ " T_Ports
+read -p "[*] Enter The Port Numbers To Block::seprate by spaces if needed[UDP]:→ " U_Ports
 echo
 
 block() {
 	for port in  $T_Ports
 	do
-		if [ "$port" != "139" &&  "$port" != "445" ]
-		then
-			iptables -A INPUT -p tcp --dport $port -m set --match-set MassBlock src -j DROP
-		else
-			iptables -A INPUT -p udp --dport $port -m set --match-set MassBlock src -j DROP
-		fi
+		iptables -A INPUT -p tcp --dport $port -m set --match-set MassBlock src -j DROP
 	done
+
+	for port in $U_Ports
+	do
+		iptables -A INPUT -p udp --dport $port -m set --match-set MassBlock src -j DROP
 }
 
 block
 
-echo "[$(date)] MassBlock Executed Successfully" >> wizard.log
-echo -e "\n[${BGr}+${NC}] Module Execution Successfull"
+echo "[$(date)] MassBlock Executed Successfully"
+echo -e "/n[${BGr}+${NC}] Module Execution Successfull"
 sleep 1
+
+
 
