@@ -269,6 +269,34 @@ Advanced_firewall() {
 	echo -e "[${GR}+${NC}] ${BRed}Honey-pot${NC}:::(Runs a honeypot to detect and Block Malicious Traffic in real-time) → 12"
 	echo
 	read -p "[*] Please choose the relevant option/options::seprate by spaces if needed:→  " ADF_options
+	for selection in ${ADF_options}
+	do
+		case "${selection}" in
+			1)
+			echo "[$(date)] Selected  WizardBlock by ${HOSTNAME}" >> wizard.log
+			chmod +x Modules/wizard_block_ad1
+			.//Modules/wizard_block_ad1
+			;;
+
+			2)
+			echo "[$(date)] Selected MassBlock by ${HOSTNAME}" >> wizard.log
+			chmod +x Modules/mass_block_ad1
+			.//Modules/mass_block_ad1
+			;;
+			
+			3)
+			echo "[$(date)] Selected Aggressive Block by ${HOSTNAME}" >> wizard.log
+			chmod +x Modules/aggr_block
+			.//Modules/aggr_block
+			;;
+
+			4)
+			echo "[$(date)] Mac-Block Selected by ${HOSTNAME}" >> wizard.log
+			chmod +x Modules/mac_block_ad1
+			.//Modules/mac_block_ad1
+		esac
+	done
+
 }
 
 
@@ -301,4 +329,5 @@ then
 	logger "${0} Running::[SF--2]::Wizard--on/at--:$(date)::::Firwall Framework For Linux By SxNade::https://github.com/SxNade"
 	Advanced_firewall
 fi
+
 
