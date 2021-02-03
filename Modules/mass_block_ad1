@@ -54,7 +54,7 @@ block() {
 	done
 }
 
-
+block
 
 echo "[$(date)] MassBlock Executed Successfully" >> wizard.log
 echo -e "\n[${BGr}+${NC}] Module Execution Successfull"
