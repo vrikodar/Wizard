@@ -52,6 +52,7 @@ block() {
 	for port in $U_Ports
 	do
 		iptables -A INPUT -p udp --dport $port -m set --match-set MassBlock src -j DROP
+	done
 }
 
 block
