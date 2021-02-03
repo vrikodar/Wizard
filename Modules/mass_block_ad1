@@ -23,21 +23,21 @@ do
 	ipset -A MassBlock $ip
 done
 
-echo "[${GR}+${NC}] Some Common Services-|-|-Ports"
-echo "${BRed}→${NC} HTTP::80"
-echo "${BRed}→${NC} HTTPS::443"
-echo "${BRed}→${NC} SSH::22"
-echo "${BRed}→${NC} FTP::21"
-echo "${BRed}→${NC} Telnet::23"
-echo "${BRed}→${NC} DNS::53"
-echo "${BRed}→${NC} SMTP::25"
-echo "${BRed}→${NC} POP3::110"
-echo "${BRed}→${NC} NTP::123"
-echo "${BRed}→${NC} IMAP::143"
-echo "${BRed}→${NC} SNMP::161"
-echo "${BRed}→${NC} IRC::194"
-echo "${BRed}→${NC} NetBIOS::139--UDP"
-echo "${BRed}→${NC} SMB::445--UDP"
+echo -e "[${GR}+${NC}] Some Common Services-|-|-Ports"
+echo  -e "${BRed}→${NC} HTTP::80"
+echo -e "${BRed}→${NC} HTTPS::443"
+echo -e "${BRed}→${NC} SSH::22"
+echo -e "${BRed}→${NC} FTP::21"
+echo -e "${BRed}→${NC} Telnet::23"
+echo -e "${BRed}→${NC} DNS::53"
+echo -e "${BRed}→${NC} SMTP::25"
+echo -e "${BRed}→${NC} POP3::110"
+echo -e "${BRed}→${NC} NTP::123"
+echo -e "${BRed}→${NC} IMAP::143"
+echo -e "${BRed}→${NC} SNMP::161"
+echo -e "${BRed}→${NC} IRC::194"
+echo -e "${BRed}→${NC} NetBIOS::139--UDP"
+echo -e "${BRed}→${NC} SMB::445--UDP"
 
 read -p "[*] Enter The Port Numbers To Block::seprate by spaces if needed:→ " T_Ports
 echo
