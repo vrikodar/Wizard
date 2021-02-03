@@ -23,7 +23,7 @@ do
 	ipset -A MassBlock $ip
 done
 
-echo -e "[${GR}+${NC}] Some Common Services-|-|-Ports"
+echo -e "[${BGr}+${NC}] Some Common Services-|-|-Ports"
 echo -e "${BRed}→${NC} HTTP::80"
 echo -e "${BRed}→${NC} HTTPS::443"
 echo -e "${BRed}→${NC} SSH::22"
@@ -57,7 +57,7 @@ block() {
 
 block
 
-echo "[$(date)] MassBlock Executed Successfully"
+echo "[$(date)] MassBlock Executed Successfully" >> wizard.log
 echo -e "/n[${BGr}+${NC}] Module Execution Successfull"
 sleep 1
 
