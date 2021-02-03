@@ -1,0 +1,62 @@
+#!/bin/bash
+#Aggressive Block Module
+
+BRed='\033[1;31m' #Bold Red
+BGr='\033[1;32m' #Bold Green
+NC='\033[0m' #No Color
+
+echo -e "\n[${Bgr}+${NC}] Loading Aggressive Block Module\n"
+echo "[$(date)] Aggressive Block  Loaded Successfully" >> wizard.log
+echo 
+echo -e "[${BGr}+${NC}] Incoming Traffic"
+echo -e "\n[${BRed}+${NC}] Packet-type to Reject with\n"
+echo -e "[${GR}+${NC}] icmp-net-unreachable → 1"
+echo -e "[${GR}+${NC}] icmp-host-unreachable → 2"
+echo -e "[${GR}+${NC}] icmp-proto-unreachable → 3"
+echo -e "[${GR}+${NC}] icmp-port-unreachable → 4"
+echo -e "[${GR}+${NC}] icmp-net-prohibited → 5"
+echo -e "[${GR}+${NC}] icmp-host-prohibited → 6"
+echo -e "[${GR}+${NC}] tcp-reset → 7"
+echo -e "[${GR}+${NC}] icmp-admin-prohibited → 8"
+
+read -p "[*] Please choose the Relevant Packet to Reject with::one only:→ " Reject
+echo
+echo "[${GR}+${NC}] Some Common Services-|-|-Ports"
+echo "${BRed}→${NC} HTTP::80"
+echo "${BRed}→${NC} HTTPS::443"
+echo "${BRed}→${NC} SSH::22"
+echo "${BRed}→${NC} FTP::21"
+echo "${BRed}→${NC} Telnet::23"
+echo "${BRed}→${NC} DNS::53"
+echo "${BRed}→${NC} SMTP::25"
+echo "${BRed}→${NC} POP3::110"
+echo "${BRed}→${NC} NTP::123"
+echo "${BRed}→${NC} IMAP::143"
+echo "${BRed}→${NC} SNMP::161"
+echo "${BRed}→${NC} IRC::194"
+echo "${BRed}→${NC} NetBIOS::139--UDP"
+echo "${BRed}→${NC} SMB::445--UDP"
+
+read -p "[*] Enter The Port Numbers To Block::seprate by spaces if needed:→ " T_Ports
+echo
+read -p "[*] Enter the IP address or Networks(CIDR) to Block:→ " IPs
+
+block() {
+	for port in  $T_Ports
+	do
+		for ip in $IPs
+		do
+			if [ "$port" -ne "139" &&  "$port" -ne "445" ]
+			then
+				iptables -A INPUT -p tcp --dport $port -s ${IPs} -j REJECT --reject-with ${Reject}
+			else
+				iptables -A INPUT -p udp --dport $port -s ${IPs} -j REJECT --reject-with ${Reject}
+			fi
+		done
+	done
+}
+
+sleep 1
+block
+echo -e "\n[${BGr}+${NC}] Module Execution Successfull\n"
+echo "[$(date)] Aggressive Module Execution Completed Successfully" >> wizard.log

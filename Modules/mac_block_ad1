@@ -1,0 +1,48 @@
+#!/bin/bash
+BRed='\033[1;31m' #Bold Red
+BGr='\033[1;32m' #Bold Green
+NC='\033[0m' #No Color
+
+echo -e "\n[${Bgr}+${NC}] Loading Mac-Block Module\n"
+echo "[$(date)] Mac-Block  Loaded Successfully" >> wizard.log
+echo 
+
+echo -e "[${GR}+${NC}] ${BRed}Manually${NC} Add Mac-addresses → 1"
+echo -e "[${GR}+${NC}] ${BRed}Text File${NC} Containing Mac-addresses → 2"
+
+read -p "[*] Please choose a relevant option/options: " Mac
+sleep 1
+echo -e "\n[${Bgr}+${NC}] Forming a Custom Mac-Block chain..\n"
+iptables -N Mac_Block
+
+manual() {
+	read -p "[*] Enter Mac addresses to Block/Black-list seprated by spaces: " Ms
+	for mac in ${Ms}
+	do
+	iptables -A Mac_Block -m mac --mac-source ${mac} -j DROP
+	done
+}
+
+file() {
+	read -p "[*] Enter File name // File Path: " data
+	for mc in $(cat data)
+	do
+	iptables -A Mac_Block -m --mac-source ${mac} -j DROP
+	done
+}
+
+for opt in Mac
+do
+
+	case ${opt} in
+		1)
+		manual
+		;;
+		
+		2)
+		file
+	esac
+done
+sleep 1
+echo -e "\n[${BGr}+${NC}] Module Execution Successfull\n"
+echo "[$(date)] Mac-Block Module Execution Completed Successfully" >> wizard.log
