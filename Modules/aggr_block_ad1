@@ -5,7 +5,7 @@ BRed='\033[1;31m' #Bold Red
 BGr='\033[1;32m' #Bold Green
 NC='\033[0m' #No Color
 
-echo -e "\n[${Bgr}+${NC}] Loading Aggressive Block Module\n"
+echo -e "\n[${BGr}+${NC}] Loading Aggressive Block Module\n"
 echo "[$(date)] Aggressive Block  Loaded Successfully" >> wizard.log
 echo 
 echo -e "[${BGr}+${NC}] Incoming Traffic"
