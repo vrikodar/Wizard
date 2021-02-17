@@ -5,7 +5,7 @@
 
 # Wizard
 
-![Capture](https://github.com/SxNade/Wizard/blob/main/giphy.gif)
+![Capture](https://i.pinimg.com/originals/8d/ab/c1/8dabc147c823c9c1eb931c17c1605421.gif)
 
 ---
 
