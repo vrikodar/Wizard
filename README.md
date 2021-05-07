@@ -1,7 +1,6 @@
 [![SxNade](https://img.shields.io/badge/MadeBy-SxNade-red)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/SxNade)
 [![Update](https://img.shields.io/badge/updated-today-brightgreen)](https://github.com/SxNade/Thor/commits/main)
-[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://github.com/SxNade)
+
 
 # Wizard
 
